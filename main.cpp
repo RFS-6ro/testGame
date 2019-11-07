@@ -3,18 +3,15 @@
 ///<summary>
 ///function to translate and print value from 10 to 2 number system
 ///</summary>
-void trans_to_binary(int value)
+void trans_to_binary(int32_t value)
 {
-	unsigned int bit_depth = 1;
-	unsigned int binary_value = 0;
-
-	while (value > 0) {
-		binary_value += bit_depth * (value % 2);
-		bit_depth *= 10;
-		value /= 2;
+	if (abs(value) < INT32_MAX)
+	{
+		for (unsigned int bite = 1U << 31; bite; bite >>= 1)
+			putchar('0' + !!(value & bite));
+		std::cout << std::endl;
 	}
-
-	std::cout << binary_value << std::endl;
+	std::cout << std::endl;
 }
 
 int main()
